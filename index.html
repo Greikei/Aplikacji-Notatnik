@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4a90e2">
+    <title>NoteHelper</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <nav class="navbar">
+        <h1 id="nav-title">Moje Notatki</h1>
+        <div id="offline-indicator" class="hidden">OFFLINE</div>
+    </nav>
+
+    <main>
+        <section id="view-home" class="view active">
+            <div id="notes-list" class="notes-container"></div>
+            <button id="btn-add-note" class="fab" aria-label="Dodaj notatkę">+</button>
+        </section>
+
+        <section id="view-voices" class="view">
+            <div id="voice-notes-list" class="voice-grid"></div>
+        </section>
+
+        <section id="view-editor" class="view">
+            <div class="editor-form">
+                
+                <div class="input-group">
+                    <label class="field-label" for="note-title">Tytuł notatki</label>
+                    <input type="text" id="note-title" placeholder="Wpisz krótki tytuł..." autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label" for="note-body">Treść Twojej notatki</label>
+                    <textarea id="note-body" placeholder="O czym chcesz pamiętać?" rows="6"></textarea>
+                </div>
+
+                <div class="native-tools">
+                    <button id="btn-geo" class="btn-tool">📍 Pobierz adres</button>
+                    <p id="geo-status" class="status-text"></p>
+                    
+                    <label for="camera-input" class="btn-tool">📷 Aparat / Zdjęcie</label>
+                    <input type="file" id="camera-input" accept="image/*" capture="environment" hidden>
+                    <div id="image-preview"></div>
+
+                    <button id="btn-record" class="btn-tool">🎤 Nagraj głos</button>
+                    <div id="audio-preview"></div>
+                </div>
+
+                <div class="nav-btns">
+                    <button id="btn-save" class="btn-primary">Zapisz notatkę</button>
+                    <button id="btn-cancel" class="btn-danger">Anuluj</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-detail" class="view">
+            <div id="detail-content"></div>
+            <button class="btn-primary full-width" onclick="app.showView('view-home')">Powrót do listy</button>
+        </section>
+    </main>
+
+    <footer class="tab-bar">
+        <button onclick="app.showView('view-home')" id="tab-home" class="active">📝 Notatki</button>
+        <button onclick="app.showView('view-voices')" id="tab-voices">🎤 Głosówki</button>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
