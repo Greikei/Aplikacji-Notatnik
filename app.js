@@ -56,17 +56,52 @@ const app = {
         document.getElementById('nav-title').textContent = titles[id] || 'GeoSnap';
     },
 
-    getGeo: () => {
-        const s = document.getElementById('geo-status');
-        s.textContent = "Ustalanie lokalizacji...";
-        navigator.geolocation.getCurrentPosition(async (p) => {
-            const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=pl`);
-            const d = await res.json();
-            const addr = `${d.city || d.locality }, ${d.countryName.toUpperCase()}`;
-            s.textContent = "📍 " + addr;
-            s.dataset.addr = addr;
-        }, () => s.textContent = "Błąd geolokalizacji");
+        getGeo: () => {
+  const s = document.getElementById('geo-status');
+  s.textContent = "Ustalanie lokalizacji...";
+
+  navigator.geolocation.getCurrentPosition(
+    async (p) => {
+      try {
+        const controller = new AbortController();
+        setTimeout(() => controller.abort(), 8000);
+
+        const res = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${p.coords.latitude}&longitude=${p.coords.longitude}&localityLanguage=pl`,
+          { signal: controller.signal }
+        );
+
+        const d = await res.json();
+
+        const city =
+          d.city ||
+          d.locality ||
+          d.principalSubdivision ||
+          '';
+
+        const addr = city
+          ? `${city}, ${d.countryCode}`
+          : 'Lokalizacja przybliżona';
+
+        s.textContent = "📍 " + addr;
+        s.dataset.addr = addr;
+
+      } catch (e) {
+        console.error(e);
+        s.textContent = "📍 Lokalizacja niedostępna";
+      }
     },
+    () => {
+      s.textContent = "❌ Brak zgody lub błąd lokalizacji";
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  );
+},
+
 
     toggleMic: async () => {
         const btn = document.getElementById('btn-record');
