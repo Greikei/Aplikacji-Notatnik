@@ -1,3 +1,4 @@
+//tworzymy sobie stałe
 const app = {
     notes: [],
     temp: { img: null, audio: null },
@@ -8,6 +9,7 @@ const app = {
     init: () => {
         // sprawdzamy czy service worker jest obslugiwany przez przegladarké
         if ('serviceWorker' in navigator) {
+            //jezeli tak rejestrujemy sobie nasz plik service workera
             navigator.serviceWorker.register('./sw.js')
             //wypisanie bledu lub sukcesu w konsoli
                 .then(() => console.log("SW zarejestrowany"))
@@ -18,7 +20,6 @@ const app = {
         app.loadNotes();
 
         app.setupEventListeners();
-        //sprawdzenie czy jestesmy offline czy online
         app.updateOnlineStatus();
         window.addEventListener('online', app.updateOnlineStatus);
         window.addEventListener('offline', app.updateOnlineStatus);
@@ -56,9 +57,9 @@ const app = {
         
         //pobieramy widok ekranu  o podanym id i pokazujemy go dodajac mu klase active
         document.getElementById(id).classList.add('active');
-        //jesli jestesmy w glownym ekranie "notatki" no to przycisk na dole ekranu odpowiadajacy temu ekranowi zostaje podswietlony
+        //jesli jestesmy w glownym ekranie "notatki", to przycisk na dole ekranu odpowiadajacy temu ekranowi zostaje podswietlony
         if(id === 'view-home') document.getElementById('tab-home').classList.add('active');
-        //jesli jestesmy na ekranie "glowoski" przycisk od tego ekranu zostanie podswietlony
+        //jesli jestesmy na ekranie "glosowki" przycisk od tego ekranu zostanie podswietlony
         if(id === 'view-voices') document.getElementById('tab-voices').classList.add('active');
         // slownik 
         const titles = { 
