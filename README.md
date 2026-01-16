@@ -36,13 +36,18 @@
 3. Klikamy "install" potwierdzając instalacje.
 4. Otwieramy aplikacje znajdującą sie na pulpicie komputera.
 
+### Metoda na telefonie (iOS)
+1. Otwieramy stronę: (https://greikei.github.io/Aplikacji-Notatnik/).
+2. Bedąc na stronie otwieramy opcje udostępniania.
+3. Klikamy opcje "Do ekranu głównego"
+
 
 ## Wydajność aplikacji
 
 ### Wydajność aplikacji była sprawdzona za pomocą narzędzia Lighthouse:
+<img width="850" height="787" alt="image" src="https://github.com/user-attachments/assets/029943c5-5c6e-4980-a1ce-39076eb67068" />
 
 
-(./NoteHelper-lighthouse.html)
 
 
 
