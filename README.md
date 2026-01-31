@@ -1,9 +1,9 @@
 # Aplikacji-Notatnik      Note Helper
 
-## Autor 
+# Autor 
+ Maciej Mowel
+ 42935
 
-# Maciej Mowel
-#42935
 
 ## Funkcjonalność
 
